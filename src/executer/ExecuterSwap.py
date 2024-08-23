@@ -4,7 +4,6 @@ import requests
 import creds
 
 infura_url = f'https://mainnet.infura.io/v3/{creds.infura_key}'
-#web3 = Web3(Web3.HTTPProvider(infura_url))
 
 alchemy = f"https://polygon-mainnet.g.alchemy.com/v2/{creds.alchemy_key}"
 
@@ -30,7 +29,6 @@ def ExecuterSwapQuickswap(amountIn,minAmountOut,path,gwei,needToApprove,tokenFee
     web3 = Web3(Web3.HTTPProvider(alchemy))
     contract = web3.eth.contract(address=Web3.toChecksumAddress(quickswap_router), abi=abi)
 
-    #approve the first token
 
     if needToApprove:
         token_contract = web3.eth.contract(address=Web3.toChecksumAddress(path[0]), abi=ERCO20_ABI)
@@ -47,13 +45,11 @@ def ExecuterSwapQuickswap(amountIn,minAmountOut,path,gwei,needToApprove,tokenFee
 
         print("TOKEN APPROVED")
         time.sleep(60)
-        #fetch gwei again because one minute has passed
         response = requests.get("https://gpoly.blockscan.com/gasapi.ashx?apikey=key&method=pendingpooltxgweidata")
         data = response.json()
         gwei = data["result"]["rapidgaspricegwei"]
 
-    #execute the actual tx
-    #swapExactTokensForTokensSupportingFeeOnTransferTokens
+
     if gwei>500:
         print("gas too high")
         return

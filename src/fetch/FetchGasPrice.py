@@ -1,5 +1,4 @@
 import requests
-# returns gas price in gwei
 import creds
 def FetchGasPrice(selectedSwap):
 
@@ -17,36 +16,29 @@ def FetchGasPrice(selectedSwap):
 
     return -1
 
-##Fetches the price of tokenA in tokenB
-#p.e tokenA=USDC tokenB=ETH
-#result=2k
+
 def FetchTokenPriceInWmatic(token):
 
     token=token.lower()
-    # Define the contract addresses of the tokens
 
-    # Define the API endpoint and parameters
     api_endpoint = 'https://api.coingecko.com/api/v3/simple/token_price/polygon-pos'
     params = {
         'vs_currencies': 'usd',
         'contract_addresses': token,
     }
 
-    # Send a GET request to the API and parse the response
     response = requests.get(api_endpoint, params=params)
     data = response.json()
     print(data)
 
     price_in_usd = data[0]['usd']
 
-    #Fetch wmatic price in USD
     api_endpoint = 'https://api.coingecko.com/api/v3/simple/price'
     params = {
         'ids': 'wmatic',
         'vs_currencies': 'usd'
     }
 
-    # Send a GET request to the API and parse the response
     response = requests.get(api_endpoint, params=params)
     data = response.json()
     print(data)

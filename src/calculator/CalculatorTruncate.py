@@ -1,7 +1,6 @@
 import decimal
 from decimal import Decimal
 
-##This function truncates a Decimal
 def CalculatorTruncate(number, decimals):
 
     i = Decimal(1)/pow(Decimal(10), decimals)

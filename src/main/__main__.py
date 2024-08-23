@@ -1,15 +1,11 @@
 import sys
 sys.path.append("../")
-import time
-#import logging
 
-#logging.basicConfig(level=logging.DEBUG)
+
 from fetch import FetchExchangeInfo
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidget, QTableWidgetItem, QPushButton, QVBoxLayout, QWidget, QMessageBox,QCheckBox
-from PyQt5 import QtCore, QtGui, QtWidgets
 import xml.etree.ElementTree as ET
-#import Swap
 from data.dataSwap import Swap
 from fetch import FetchArbitrage
 
@@ -19,7 +15,6 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        # Load swaps from XML
         self.swaps = []
 
         try:
@@ -35,7 +30,6 @@ class MainWindow(QMainWindow):
             pass
 
 
-        # Create QTableWidget and populate with swaps
 
         self.table = QTableWidget()
         self.table.cellChanged.connect(self.update_swap)
@@ -48,7 +42,6 @@ class MainWindow(QMainWindow):
             self.table.setItem(row, 2, QTableWidgetItem(swap.Router))
             self.table.setItem(row, 3, QTableWidgetItem(swap.Factory))
 
-        # Add buttons to add and save swaps
         add_button = QPushButton('Add Swap', self)
         add_button.clicked.connect(self.add_swap)
         save_button = QPushButton('Save Swaps', self)
@@ -56,7 +49,6 @@ class MainWindow(QMainWindow):
         fetch_button = QPushButton('Fetch Info', self)
         fetch_button.clicked.connect(self.fetch_info)
 
-        # Set layout and add widgets
         central_widget = QWidget()
         layout = QVBoxLayout()
         layout.addWidget(self.table)
@@ -66,15 +58,12 @@ class MainWindow(QMainWindow):
         central_widget.setLayout(layout)
         self.setCentralWidget(central_widget)
 
-        #Remove button
         remove_button = QPushButton('Remove Swap', self)
         remove_button.clicked.connect(self.remove_swap)
         layout.addWidget(remove_button)
 
-        #Fetch info button
         layout.addWidget(fetch_button)
 
-        #Fetch Arbitrage button
         button_fetch_arbitrage = QPushButton('Fetch Arbitrage')
         button_fetch_arbitrage.clicked.connect(self.fetch_arbitrage)
         self.checkbox_filter = QCheckBox('Filter')
@@ -82,7 +71,6 @@ class MainWindow(QMainWindow):
         layout.addWidget(button_fetch_arbitrage)
 
     def update_swap(self, row, column):
-        # Update corresponding swap object with new value
         swap = self.swaps[row]
         new_value = self.table.item(row, column).text()
         if column == 0:
@@ -94,7 +82,6 @@ class MainWindow(QMainWindow):
         elif column == 3:
             swap.Factory = new_value
     def add_swap(self):
-        # Add new swap to list and table
         new_swap = Swap('New Swap', '', '', '')
         self.swaps.append(new_swap)
         row = self.table.rowCount()
@@ -112,19 +99,15 @@ class MainWindow(QMainWindow):
         selected_indexes = selection_model.selectedIndexes()
         swap=None
         if selected_indexes:
-            # Get the row of the first selected index
             row = selected_indexes[0].row()
 
-            # Get the swap at that row
             swap = self.swaps[row]
 
-        # Call the external function to fetch info
 
         t = Thread(target=FetchExchangeInfo.FetchExchangeInfo, args=(swap,))
         t.start()
 
-        # Update the datagrid with any new information fetched by the external function
-        #self.update_swap(swap_data)
+
 
     def fetch_arbitrage(self):
         selection_model = self.table.selectionModel()
@@ -132,24 +115,19 @@ class MainWindow(QMainWindow):
         swap = None
 
         if selected_indexes:
-            # Get the row of the first selected index
             row = selected_indexes[0].row()
 
-            # Get the swap at that row
             swap = self.swaps[row]
 
         is_filter_enabled = self.checkbox_filter.isChecked()
 
 
-        # call the external function in a separate thread
         t = Thread(target=FetchArbitrage.FetchArbitrage, args=(swap, is_filter_enabled))
         t.start()
 
 
-        #FetchArbitrage.FetchArbitrage(swap, is_filter_enabled)
 
     def save_swaps(self):
-        # Save swaps to XML
         root = ET.Element('swaps')
         for swap in self.swaps:
             swap_node = ET.SubElement(root, 'swap')
@@ -165,17 +143,14 @@ class MainWindow(QMainWindow):
         tree.write('swaps.xml')
 
     def remove_swap(self):
-        # Get selected swap
         current_row = self.table.currentRow()
         if current_row < 0:
             return
         selected_swap = self.swaps[current_row]
 
-        # Show confirmation dialog
         confirmation = QMessageBox.question(self, "Confirm removal", "Are you sure you want to remove this swap?",
                                             QMessageBox.Yes | QMessageBox.No)
         if confirmation == QMessageBox.Yes:
-            # Remove swap from list and table
             self.swaps.remove(selected_swap)
             self.table.removeRow(current_row)
 

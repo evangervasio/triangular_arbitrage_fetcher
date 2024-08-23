@@ -1,8 +1,7 @@
 import json
 from web3 import Web3
 import creds
-from calculator import CalculatorTruncate
-#uniswap_v2_router="0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
+
 uniswap_v2_router=Web3.toChecksumAddress("0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D")
 quickswap_router=Web3.toChecksumAddress("0xa5E0829CaCEd8fFDD4De3c43696c57F7D7A678ff")
 apeswap_router=Web3.toChecksumAddress("0xC0788A3aD43d79aa53B09c2EaCc313A787d1d607")
@@ -12,7 +11,6 @@ alchemy = f"https://polygon-mainnet.g.alchemy.com/v2/{creds.alchemy_key}"
 web3 = Web3(Web3.HTTPProvider(infura_url))
 
 
-##This function calls the getAmountsOut function of the uniswap router to simulate the result of an arbitrage
 def FetchGetAmountsOut(selectedSwap,amountIn, triangle):
 
     if selectedSwap.Network=="Polygon":

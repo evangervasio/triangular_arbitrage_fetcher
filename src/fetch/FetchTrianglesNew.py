@@ -35,7 +35,6 @@ def FetchTrianglesNew(swapName):
     print("2")
     for triangle in tqdm(triangles):
         infoPair0 = pair_info[(triangle[0], triangle[1])]
-        #print(infoPair0)
         infoPair1 = pair_info[(triangle[1], triangle[2])]
         infoPair2 = pair_info[(triangle[2], triangle[0])]
 
@@ -58,4 +57,3 @@ def FetchTrianglesNew(swapName):
 
     print("(new) DONE---Triangles found saved in triangles.csv")
 
-#FetchTrianglesNew("Quickswap")
