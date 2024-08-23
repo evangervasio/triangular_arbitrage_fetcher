@@ -9,7 +9,10 @@ def CalculatorAmount(maxAmount,decimals,a12,a21,a23,a32,a13,a31,r1,r2):
     A1= A3 * a31 * (1 - 0.03)
 
 
-
+"""
+Calculates the optimal amount of a token to be put as an input on an arbitrage transaction for gaining maximum returns,
+in an iterative way.
+"""
 def CalculatorAmountIter(maxAmount,decimals,a12,a21,a23,a32,a13,a31,r1,r2):
 
   i=math.ceil(maxAmount/30000)

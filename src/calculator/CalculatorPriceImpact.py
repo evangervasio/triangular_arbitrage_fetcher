@@ -1,5 +1,8 @@
 from decimal import Decimal
 
+"""
+Calculates the price impact.
+"""
 def CalculatorPriceImpact(a12, a21, amountIn1, amountIn2, amountOut1, amountOut2):
     constant = Decimal(a12 * a21)
     x = Decimal(0)
@@ -14,8 +17,6 @@ def CalculatorPriceImpact(a12, a21, amountIn1, amountIn2, amountOut1, amountOut2
         x = ((constant) / (a21 - amountOut2)) - a12
 
     return x
-
-
 
 
 def CalculatorPriceImpactS(a12, a21, amountIn1):
