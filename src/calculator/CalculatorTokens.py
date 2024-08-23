@@ -3,6 +3,12 @@ import os
 import csv
 cur_path = os.path.dirname(__file__)
 
+"""
+Given a csv list of tokens to filter, takes a csv of "triangles" (triangular arbitrage tokens) and filters it creating a
+new "trianglesFilter.csv" file.
+"tokensToExclude.csv" removes every triangle that has a token listed in this csv.
+"tokensToInclude.csv" removes every triangle that has not a token listed in this csv.
+"""
 def CalculatorTokens(selectedSwap):
     try:
         path_include = os.path.relpath(f"../files/files{selectedSwap.Name}/tokensLimits.csv", cur_path)
@@ -47,7 +53,6 @@ def CalculatorTokens(selectedSwap):
                if any(filtered_triangle[i].lower() == t for i in range(6, 12)):
                    filtered_triangles.remove(filtered_triangle)
 
-        # REMOVE DUPLICATES
         cleaned_list = list(set(tuple(sublist) for sublist in filtered_triangles))
         cleaned_list = [list(sublist) for sublist in cleaned_list]
 

@@ -31,6 +31,10 @@ def FetchReservesApeswap(pair):
     reserves=contract.functions.getReserves().call()
     return reserves[0],reserves[1]
 
+
+"""
+Makes smart contract calls to retrieve the reserves of the given tokens in a pool.
+"""
 def FetchReserves(selectedSwap,pair):
 
     if selectedSwap.Network=="Polygon":

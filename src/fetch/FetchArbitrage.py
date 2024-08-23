@@ -35,6 +35,10 @@ path_apeswap = os.path.relpath("../files/filesApeswap/tokensLimits.csv", cur_pat
 WMATIC='0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270'
 
 rate_limiter = RateLimiter(max_calls=8, period=1)
+
+"""
+Fetches all the reserves of the triangles in a csv list of a swap.
+"""
 @rate_limiter
 def fetch_all_reserves(selectedSwap,filter):
     if filter:
@@ -61,6 +65,12 @@ def fetch_all_reserves(selectedSwap,filter):
                         reserves[row_id] = {}
                     reserves[row_id][i] = reserve
     return reserves
+
+"""
+Iterates trough every triangle listed in a csv of a selected swap, calculating the profitability of the arbitrage,
+including blockchain fees, DEX fees, price impact and maximum input amount of the user. When profitable arbitrage is found,
+executes it. For security purposes in this state the code will not actually execute the transaction.
+"""
 def FetchArbitrage(selectedSwap,filter):
     contatore=0
 

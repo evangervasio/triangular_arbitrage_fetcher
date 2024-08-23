@@ -10,7 +10,9 @@ infura_url = f'https://mainnet.infura.io/v3/{creds.infura_key}'
 alchemy = f"https://polygon-mainnet.g.alchemy.com/v2/{creds.alchemy_key}"
 web3 = Web3(Web3.HTTPProvider(infura_url))
 
-
+"""
+Calls the "getAmountOut" function available on every uniswap fork router smart contract.
+"""
 def FetchGetAmountsOut(selectedSwap,amountIn, triangle):
 
     if selectedSwap.Network=="Polygon":

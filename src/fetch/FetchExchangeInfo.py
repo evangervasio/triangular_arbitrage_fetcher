@@ -34,6 +34,9 @@ rate_limiter = RateLimiter(max_calls=2, period=1)
 global w3
 
 
+"""
+Returns essential pair data such as the tokens involved, their symbols and decimals.
+"""
 @rate_limiter
 def fetch_pair_data(pair):
     global w3
@@ -81,6 +84,11 @@ def get_pair(i):
                     raise
             time.sleep((2 ** x) + np.random.random())
     return p
+
+"""
+Automatically fetches all pairs of a given Uniswap fork router contract without an API, with the possibility of excluding pools with 
+a total liquidity under or over a certain threshold, then calculates all the possible triangles for triangular arbitrage.
+"""
 def FetchExchangeInfo(selectedSwap):
 
     global w3

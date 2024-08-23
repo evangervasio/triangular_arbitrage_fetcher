@@ -1,5 +1,9 @@
 import requests
 import creds
+
+"""
+Fetches gas price of the blockchain of the selected swap.
+"""
 def FetchGasPrice(selectedSwap):
 
     if selectedSwap.Network=="Polygon":
@@ -15,7 +19,6 @@ def FetchGasPrice(selectedSwap):
 
 
     return -1
-
 
 def FetchTokenPriceInWmatic(token):
 

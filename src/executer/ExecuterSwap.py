@@ -21,6 +21,10 @@ def ExecuterSwapUniswap(amountIn,path):
     web3 = Web3(Web3.HTTPProvider(infura_url))
     contract = web3.eth.contract(address=Web3.toChecksumAddress(uniswap_router), abi=abi)
 
+"""
+Effectively executes triangular arbitrage on Quickswap. 
+The line of code that actually executes the transaction is commented out for security purposes.
+"""
 def ExecuterSwapQuickswap(amountIn,minAmountOut,path,gwei,needToApprove,tokenFees):
     if gwei>500:
         print("gas too high")

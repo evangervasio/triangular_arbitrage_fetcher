@@ -3,6 +3,10 @@ import csv
 from tqdm import tqdm
 from collections import defaultdict
 
+"""
+Given a list of pairs, calculates all the possible combinations of three pairs that have tokens in common forming a 
+"triangle"
+"""
 def FetchTrianglesNew(swapName):
     cur_path = os.path.dirname(__file__)
     new_path = os.path.relpath(f"../temp/temp{swapName}/pairs.csv", cur_path)
