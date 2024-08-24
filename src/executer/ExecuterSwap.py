@@ -22,21 +22,22 @@ def ExecuterSwapUniswap(amountIn,path):
     contract = web3.eth.contract(address=Web3.toChecksumAddress(uniswap_router), abi=abi)
 
 """
-Effectively executes triangular arbitrage on Quickswap. 
+Effectively executes triangular arbitrage on a polygon network uniswap fork. 
 The line of code that actually executes the transaction is commented out for security purposes.
 """
-def ExecuterSwapQuickswap(amountIn,minAmountOut,path,gwei,needToApprove,tokenFees):
+
+def ExecuterSwapPolygon(selectedSwap,amountIn,minAmountOut,path,gwei,needToApprove,tokenFees):
     if gwei>500:
-        print("gas too high")
+        print("Execution error: gas over 500 gwei")
         return
 
     web3 = Web3(Web3.HTTPProvider(alchemy))
-    contract = web3.eth.contract(address=Web3.toChecksumAddress(quickswap_router), abi=abi)
+    contract = web3.eth.contract(address=Web3.toChecksumAddress(selectedSwap.Router), abi=abi)
 
 
     if needToApprove:
         token_contract = web3.eth.contract(address=Web3.toChecksumAddress(path[0]), abi=ERCO20_ABI)
-        tx = token_contract.functions.approve(quickswap_router,999999000000000000000000).buildTransaction({
+        tx = token_contract.functions.approve(selectedSwap.Router,999999000000000000000000).buildTransaction({
             'gas': 50000,
             'gasPrice': web3.toWei(gwei, 'gwei'),
             'nonce': web3.eth.get_transaction_count(my_address),
@@ -47,7 +48,7 @@ def ExecuterSwapQuickswap(amountIn,minAmountOut,path,gwei,needToApprove,tokenFee
 
         tx_hash = web3.eth.send_raw_transaction(signed_tx.rawTransaction)
 
-        print("TOKEN APPROVED")
+        print("Execution info: token amount approved to be used")
         time.sleep(60)
         response = requests.get("https://gpoly.blockscan.com/gasapi.ashx?apikey=key&method=pendingpooltxgweidata")
         data = response.json()
@@ -55,7 +56,7 @@ def ExecuterSwapQuickswap(amountIn,minAmountOut,path,gwei,needToApprove,tokenFee
 
 
     if gwei>500:
-        print("gas too high")
+        print("Execution error: gas over 500 gwei")
         return
     if tokenFees:
         tx = contract.functions.swapExactTokensForTokensSupportingFeeOnTransferTokens(amountIn, minAmountOut, path, my_address,9999999999).buildTransaction({
@@ -76,4 +77,4 @@ def ExecuterSwapQuickswap(amountIn,minAmountOut,path,gwei,needToApprove,tokenFee
 
     #tx_hash = web3.eth.send_raw_transaction(signed_tx.rawTransaction)
 
-    print("ARBITRAGE EXECUTED")
+    print("Execution info: triangular arbitrage transaction sent over blockchain")

@@ -69,7 +69,7 @@ def CalculatorSetSwap(triangle, reserves):
 
     return a12,a21,a23,a32,a13,a31
 
-
+#Unused
 def CalculatorSetOrderTokens(triangle):
 
     if triangle[1]==triangle[4] or triangle[1]==triangle[5]:

@@ -16,7 +16,7 @@ from calculator import CalculatorAmount
 from calculator import CalculatorDecimalIn
 from calculator import CalculatorTokens
 from tqdm import tqdm
-
+from executer import ExecuterSwap
 
 from fetch import FetchGasPrice
 import concurrent.futures
@@ -238,6 +238,7 @@ def FetchArbitrage(selectedSwap,filter):
                                     print(getAmountsOut)
                                     if selectedSwap.Name=="Quickswap":
                                         if filter:
+                                            #ExecuterSwap.ExecuterSwapPolygon(selectedSwap,getAmountsOut[0],getAmountsOut[0],triangleAddresses,gas_price_gwei,False,False)
                                             print("0-would have executed trade")
 
                                         else: print("1-would have executed trade")

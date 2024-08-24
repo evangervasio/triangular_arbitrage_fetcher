@@ -2,6 +2,8 @@ from decimal import Decimal
 from calculator import CalculatorSwap
 import math
 
+
+#Unused
 def CalculatorAmount(maxAmount,decimals,a12,a21,a23,a32,a13,a31,r1,r2):
     A1=1
     A2 = A1 * a12 * (1 - 0.03)
@@ -31,6 +33,7 @@ def CalculatorAmountIter(maxAmount,decimals,a12,a21,a23,a32,a13,a31,r1,r2):
     amount=amount+i
   return optInput
 
+#Unused
 def CalculatorAmountIterNew(maxAmount, decimals, a12, a21, a23, a32, a13, a31, r1, r2):
     i = maxAmount // 30000
     maxProfit = Decimal(0)
@@ -44,6 +47,8 @@ def CalculatorAmountIterNew(maxAmount, decimals, a12, a21, a23, a32, a13, a31, r
             optInput = amount
 
     return optInput
+
+#Unused
 def isArbitrageProfitable(decimals,a12,a23,a31):
     A1=1
     A2 = A1 * a12 * (Decimal(1) - Decimal(0.03))

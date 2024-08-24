@@ -18,7 +18,7 @@ def CalculatorPriceImpact(a12, a21, amountIn1, amountIn2, amountOut1, amountOut2
 
     return x
 
-
+#Unused
 def CalculatorPriceImpactS(a12, a21, amountIn1):
     constant = a12 * a21
     x = ((constant) / (-a12 - amountIn1)) + a21

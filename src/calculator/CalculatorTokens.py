@@ -46,7 +46,6 @@ def CalculatorTokens(selectedSwap):
                     if (row[6].lower()==t or row[7].lower()==t) and (row[10].lower()==t or row[11].lower()==t):
                         filtered_triangles.append(row)
 
-        filtered_triangles_=[]
         for t in tokensToExclude:
             t = t.lower()
             for filtered_triangle in filtered_triangles:
