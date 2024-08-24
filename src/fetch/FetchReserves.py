@@ -4,7 +4,7 @@ import requests
 from web3 import Web3
 import time
 import numpy as np
-import creds
+from fetch import creds
 infura_url = f'https://mainnet.infura.io/v3/{creds.infura_key}'
 
 alchemy = f"https://polygon-mainnet.g.alchemy.com/v2/{creds.alchemy_key}"

@@ -1,7 +1,8 @@
 from decimal import Decimal
 
 """
-Calculates the price impact.
+Calculates the price impact based on the way an AMM like Uniswap works. The formula used here are derived from the 
+Uniswap formulas to automatically determine price whenever a new trade is made inside a pool.
 """
 def CalculatorPriceImpact(a12, a21, amountIn1, amountIn2, amountOut1, amountOut2):
     constant = Decimal(a12 * a21)

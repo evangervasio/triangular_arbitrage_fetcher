@@ -1,7 +1,7 @@
 from web3 import Web3
 import time
 import requests
-import creds
+from executer import creds
 
 infura_url = f'https://mainnet.infura.io/v3/{creds.infura_key}'
 
@@ -22,7 +22,9 @@ def ExecuterSwapUniswap(amountIn,path):
     contract = web3.eth.contract(address=Web3.toChecksumAddress(uniswap_router), abi=abi)
 
 """
-Effectively executes triangular arbitrage on a polygon network uniswap fork. 
+Effectively executes triangular arbitrage on a polygon network uniswap fork.
+If 'needToApprove' is true, the function will also execute an approval transaction of the right amount of the interested
+token. Some tokens also have an internal fee therefore the method to call would be swapExactTokensForTokensSupportingFeeOnTransferTokens.
 The line of code that actually executes the transaction is commented out for security purposes.
 """
 

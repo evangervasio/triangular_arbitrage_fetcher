@@ -1,6 +1,6 @@
 import json
 from web3 import Web3
-import creds
+from fetch import creds
 
 uniswap_v2_router=Web3.toChecksumAddress("0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D")
 quickswap_router=Web3.toChecksumAddress("0xa5E0829CaCEd8fFDD4De3c43696c57F7D7A678ff")

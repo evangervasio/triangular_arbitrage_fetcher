@@ -1,5 +1,5 @@
 import requests
-import creds
+from fetch import creds
 
 """
 Fetches gas price of the blockchain of the selected swap.
