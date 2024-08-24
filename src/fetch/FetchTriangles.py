@@ -119,6 +119,5 @@ def FetchTriangles(swapName):
         rowwriter = csv.writer(csvfile)
         for triangle in trianglesFull:
             rowwriter.writerow(triangle)
-    print("DONE---Triangles found saved in triangles.csv")
 
 

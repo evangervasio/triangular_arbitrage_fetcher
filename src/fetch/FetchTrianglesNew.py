@@ -13,7 +13,7 @@ def FetchTrianglesNew(swapName):
 
     pairs = defaultdict(set)
     pair_info = dict()
-    print("OPENING CSV..")
+
     with open(new_path, "r", encoding="utf-8") as csv_file:
         csv_reader = csv.reader(csv_file)
         next(csv_file)
@@ -26,7 +26,7 @@ def FetchTrianglesNew(swapName):
             pair_info[(token1, token0)] = row
 
     triangles = []
-    print("1")
+
     for token0, set1 in tqdm(pairs.items()):
         for token1 in set1:
             set2 = pairs[token1]
@@ -36,7 +36,7 @@ def FetchTrianglesNew(swapName):
                     triangles.append([token0, token1, token2])
 
     trianglesFull = []
-    print("2")
+
     for triangle in tqdm(triangles):
         infoPair0 = pair_info[(triangle[0], triangle[1])]
         infoPair1 = pair_info[(triangle[1], triangle[2])]
@@ -48,7 +48,7 @@ def FetchTrianglesNew(swapName):
                     infoPair2[3], infoPair2[4]]
 
         trianglesFull.append(fullInfo)
-    print("3")
+
     new_path = os.path.relpath(f"../files/files{swapName}/triangles.csv", cur_path)
     directory, filename = os.path.split(new_path)
     if not os.path.exists(directory):
@@ -59,5 +59,4 @@ def FetchTrianglesNew(swapName):
         for triangle in trianglesFull:
             rowwriter.writerow(triangle)
 
-    print("(new) DONE---Triangles found saved in triangles.csv")
 

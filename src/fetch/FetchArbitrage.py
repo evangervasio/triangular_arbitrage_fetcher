@@ -98,7 +98,7 @@ def FetchArbitrage(selectedSwap,filter):
     while True:
         rowid = 0
         reservesFull = fetch_all_reserves(selectedSwap, filter)
-        print("reserved fetched")
+        print("Arbitrage Fetch: reserved fetched")
         with open(new_path, "r") as read_obj:
             csv_reader = csv.reader(read_obj)
             for row in tqdm(csv_reader):
@@ -171,13 +171,13 @@ def FetchArbitrage(selectedSwap,filter):
                     arbitrageResults.append([optAmountIn, profit])
 
                     if profit>0:
+
+                        print("Arbitrage Fetch: possible profit calculated: "+str(profit)+ " input: "+str(optAmountIn)+" output: "+str(amountOut)+" triangle: "+triangle[0]+" ; "+triangle[1]+" ; "+triangle[2]+" ; "+triangle[3]+" ; "+triangle[4]+" ; "+triangle[5])
+                        print("profit percentage: "+str((amountOut*100/optAmountIn)-100))
                         if (triangle[0] == triangle[4] or triangle[0] == triangle[5]):
                             print("input token: "+triangle[0])
                         else:
                             print("input token: "+triangle[1])
-                        print("profit !: "+str(profit)+ " input: "+str(optAmountIn)+" output: "+str(amountOut)+" triangle: "+triangle[0]+" ; "+triangle[1]+" ; "+triangle[2]+" ; "+triangle[3]+" ; "+triangle[4]+" ; "+triangle[5])
-                        print("percentage: "+str((amountOut*100/optAmountIn)-100))
-
                         triangleAddresses=[]
                         triangleAddresses.append(row_[6])
                         triangleAddresses.append(row_[7])
@@ -191,19 +191,18 @@ def FetchArbitrage(selectedSwap,filter):
                         getAmountsOut=FetchGetAmountsOut.FetchGetAmountsOut(selectedSwap,optAmountIn,triangleAddresses)
 
                         actualPercentage=(getAmountsOut[3]*100/getAmountsOut[0])-100
-                        print("getAmountsOut: "+str(getAmountsOut))
 
                         if actualPercentage>0:
                             gas_price_gwei=FetchGasPrice.FetchGasPrice(selectedSwap)
 
-                            print("gas price: " + str(gas_price_gwei) + " gwei")
+                           # print("gas price: " + str(gas_price_gwei) + " gwei")
 
                             while gas_price_gwei>500:
 
                                 time.sleep(1)
                                 gas_price_gwei=FetchGasPrice.FetchGasPrice(selectedSwap)
 
-                                print("gas price: "+ str(gas_price_gwei)+" gwei")
+                              #  print("gas price: "+ str(gas_price_gwei)+" gwei")
 
 
                             getAmountsOut = FetchGetAmountsOut.FetchGetAmountsOut(selectedSwap,optAmountIn, triangleAddresses)
@@ -212,8 +211,6 @@ def FetchArbitrage(selectedSwap,filter):
 
 
                                 fees=((gas_price_gwei*pow(10,-9))*270000)*pow(10,18)
-                                print("-----------")
-                                print(fees)
 
                                 if selectedSwap.Network=="Polygon":
 
@@ -226,7 +223,7 @@ def FetchArbitrage(selectedSwap,filter):
                                             amountOut=getAmountsOut[3]*token_price_in_wmatic
                                         except Exception as e:
                                             print(e)
-                                            print("cant fetch price in wmatic of token")
+                                            print("Arbitrage Fetch: ERROR - cannot fetch price of token in wmatic")
                                             amountIn=-1
                                             amountOut=-1
 
@@ -235,28 +232,28 @@ def FetchArbitrage(selectedSwap,filter):
                                         amountOut=getAmountsOut[3]
 
                                 if Decimal(amountOut)-Decimal(fees)>Decimal(amountIn):
-                                    print(getAmountsOut)
                                     if selectedSwap.Name=="Quickswap":
                                         if filter:
                                             #ExecuterSwap.ExecuterSwapPolygon(selectedSwap,getAmountsOut[0],getAmountsOut[0],triangleAddresses,gas_price_gwei,False,False)
-                                            print("0-would have executed trade")
+                                            print("Arbitrage Fetch: triangular arbitrage transaction sent in execution")
 
-                                        else: print("1-would have executed trade")
+                                        else: print("Arbitrage Fetch: triangular arbitrage transaction sent in execution")
                                     else:
-                                        print("would have executed trade")
+                                        # ExecuterSwap.ExecuterSwapPolygon(selectedSwap,getAmountsOut[0],getAmountsOut[0],triangleAddresses,gas_price_gwei,False,False)
+                                        print("Arbitrage Fetch: triangular arbitrage transaction sent in execution")
 
                                 else:
-                                    print("arbitrage not profitable because of fees: "+"%.0f" % (fees))
+                                    print("Arbitrage Fetch: ERROR - arbitrage not profitable because of blockchain fees: "+"%.0f" % (fees))
                                     print()
                             else:
-                                print("arbitrage not anymore profitable")
+                                print("Arbitrage Fetch: ERROR - arbitrage not anymore profitable")
 
 
                     triangle=[]
                     True
 
-        print("Arbitrage Fetch Ended. WAITING 0 SECONDS."+ " --- "+str(datetime.datetime.now()))
-        print("REPEATING ARBITRAGE FETCH - counter: "+str(contatore) + " --- "+str(datetime.datetime.now()))
+        print("Arbitrage Info: arbitrage fetch ended."+ " --- "+str(datetime.datetime.now()))
+        print("Arbitrage Info: repeating arbitrage cycle fetch - counter: "+str(contatore) + " --- "+str(datetime.datetime.now()))
         contatore=contatore+1
 
 

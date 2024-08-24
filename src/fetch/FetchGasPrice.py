@@ -32,7 +32,6 @@ def FetchTokenPriceInWmatic(token):
 
     response = requests.get(api_endpoint, params=params)
     data = response.json()
-    print(data)
 
     price_in_usd = data[0]['usd']
 
@@ -44,8 +43,7 @@ def FetchTokenPriceInWmatic(token):
 
     response = requests.get(api_endpoint, params=params)
     data = response.json()
-    print(data)
-    print(data)
+
     wmatic_price_in_usd = data['wmatic']['usd']
 
     price_in_wmatic = price_in_usd / wmatic_price_in_usd

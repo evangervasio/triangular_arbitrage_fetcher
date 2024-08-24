@@ -154,7 +154,7 @@ def FetchPairsQuickswap():
                     [pair, token0, token1, symbol0, symbol1, decimals0, decimals1]
                 )
     except:
-        print("EXCEPTION OCCURRED")
+        print("exception occurred")
         i=i-1
         sleep(5)
 

@@ -30,12 +30,9 @@ def FetchGetAmountsOut(selectedSwap,amountIn, triangle):
         triangle[i]=Web3.toChecksumAddress(triangle[i])
         i=i+1
 
-    print(triangle)
     try:
-        print(amountIn)
         amountsOut=contract.functions.getAmountsOut(amountIn, triangle).call()
     except Exception as e:
-        print(e)
         amountsOut=0
     return amountsOut
 
