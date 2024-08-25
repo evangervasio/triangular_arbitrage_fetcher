@@ -36,8 +36,26 @@ global w3
 
 
 """
-Returns essential pair data such as the tokens involved, their symbols and decimals.
-"""
+Returns essential data about a token pair, including the tokens involved, their symbols, and decimal places.
+
+This function retrieves information about a token pair contract on the blockchain. It uses the pair contract's ABI to 
+fetch addresses of the two tokens involved and then queries each token's contract for additional details such as their 
+decimals and symbols. The function includes retry logic to handle temporary errors and ensure successful data retrieval.
+
+### Parameters:
+- `pair`: The address of the pair contract for which data needs to be fetched.
+
+### Returns:
+- `tuple`: A tuple containing:
+  - The pair address.
+  - The address of the first token (`token0`).
+  - The address of the second token (`token1`).
+  - The decimal places for the first token (`token0_decimals`).
+  - The decimal places for the second token (`token1_decimals`).
+  - The symbol of the first token (`symbol0`).
+  - The symbol of the second token (`symbol1`).
+
+  If any of the values could not be retrieved, they are returned as `None`."""
 @rate_limiter
 def fetch_pair_data(pair):
     global w3
@@ -99,6 +117,12 @@ a total liquidity under or over a certain threshold, then calculates all the pos
 - **Concurrency:** Utilizes concurrent processing to efficiently handle large numbers of pairs, improving performance.
 - **Automated Triangle Calculation:** After fetching pair data, it automatically calculates all possible triangular 
   arbitrage opportunities, streamlining the arbitrage discovery process.
+  
+### Parameters:
+- `selectedSwap`: An object containing relevant swap details, such as the router contract address.
+
+### Returns:
+- The function does not return any value.
 """
 def FetchExchangeInfo(selectedSwap):
 

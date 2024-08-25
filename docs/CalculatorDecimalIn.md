@@ -1,4 +1,3 @@
-"""
 This function determines the decimal position number (p.e. 18) of the token we are putting an amount input in and getting
 an amount output from in a triangular arbitrage transaction.
 
@@ -9,9 +8,3 @@ an amount output from in a triangular arbitrage transaction.
 
 ### Returns:
 - `int`: The number of decimal places used by the token that is being used as input for the arbitrage transaction.
-"""
-def CalculatorDecimalIn(triangle, decimals):
-    if(triangle[0]==triangle[4] or triangle[0]==triangle[5]):
-        return decimals[0]
-    else:
-        return decimals[1]
