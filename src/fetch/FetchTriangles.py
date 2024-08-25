@@ -2,7 +2,7 @@ import os
 import csv
 from tqdm import tqdm
 
-
+#Unused
 def FetchTriangles(swapName):
     cur_path = os.path.dirname(__file__)
     new_path = os.path.relpath(f"../temp/temp{swapName}/pairs.csv", cur_path)

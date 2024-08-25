@@ -9,6 +9,7 @@ import requests
 
 sys.path.append("../")
 
+#Unused
 def FetchPairsUniswap():
 
   for i in tqdm(range(3803)):
@@ -75,6 +76,7 @@ def FetchPairsUniswap():
                  [pair, token0, token1, symbol0, symbol1, decimals0, decimals1]
             )
 
+#Unused
 def removeDuplicates(Uniswap,Quickswap):
 
   if Uniswap==True:
@@ -94,6 +96,7 @@ def removeDuplicates(Uniswap,Quickswap):
       df.to_csv(new_pathOutput, index=False)
 
 
+#Unused
 def FetchPairsQuickswap():
 
 
@@ -158,7 +161,7 @@ def FetchPairsQuickswap():
         i=i-1
         sleep(5)
 
-
+#Unused
 def FetchPairsApeswap():
     query = """query pairs(first: 1000, where: {reserveUSD_gt:"1000"}) {
              id

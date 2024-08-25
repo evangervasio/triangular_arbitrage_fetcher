@@ -72,6 +72,8 @@ def fetch_pair_data(pair):
 
             time.sleep((2 ** i) + np.random.random())
     return pair, token0, token1, token0_decimals, token1_decimals, symbol0, symbol1
+
+#Unused
 @rate_limiter
 def get_pair(i):
     global factory_contract
