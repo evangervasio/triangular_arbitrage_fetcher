@@ -1,15 +1,7 @@
 ### Disclaimer:
-This project was created and ended when i was 15 to 17, with
-a very unexperienced mind. I picked up this
-project after 2 years to somehow make it "releasable", cleaning
-up what i could and writing function documentation based
-on what i remembered, with the help of AI. Therefore, the code
-is buggy, unoptimized and badly structured. Even tho this bot
-works, it is unfinished.
+This bot at its current speed is not actually able to make real money from executing triangular arbitrage. If you choose to use this bot for economic purposes, you’re doing so at your own risks.
 
-This bot is not able to perfom actual profitable triangular
-arbitrage at its current speed. 
-Use this bot for economic gains at your own risks.
+This project was created when i was very unexperienced, approaching real coding for the first time, so expect the code of this project to be unoptimized, unstructured, unclean and mostly unfinished. I picked up this project after 2 years to write function documentation of it based on what i remembered and with the help of AI.
 
 ### Description:
 Arbplus is a tool designed to completely automate the process
