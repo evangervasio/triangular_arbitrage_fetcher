@@ -1,7 +1,7 @@
 ### Disclaimer:
 This bot at its current speed is not actually able to make real money from executing triangular arbitrage. If you choose to use this bot for economic purposes, you’re doing so at your own risks.
 
-This project was created when i was very unexperienced, approaching real coding for the first time, so expect the code of this project to be unoptimized, unstructured, unclean and mostly unfinished. I picked up this project after 2 years to write function documentation of it based on what i remembered and with the help of AI.
+This project was created when i was very unexperienced, so expect the code of this project to be unoptimized, and overall just pretty badly written. Function documentation is written with the help of AI.
 
 ### Description:
 Arbplus is a tool designed to completely automate the process
@@ -19,6 +19,15 @@ set to fetch data and start scanning for triangular arbitrage
 opportunities.
 This is made possible by not relying on different APIs for
 every DEX, but rather gathering data on chain, making this method universally appliable.
+
+### Installation:
+
+1. clone the repo
+2. get a free alchemy api key (for polygon network)
+3. get a free infura api key (for ethereum network)
+4. get a free etherscan api key (for ethereum network)
+5. create a "creds.py" file and write on it these keys with the variables names "alchemy_key, infura_key, etherscan"
+6. copy and paste "creds.py" in the calculator, fetch and executer folder
 
 ### Usage:
 **Add a new Uniswap fork:**
