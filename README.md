@@ -41,3 +41,5 @@ Otherwise, every triangle fetched will be used.
 ![Alt text](Screenshot_1.png)
 
 ### Documentation:
+
+[Function Documentation](docs/docs.md)
