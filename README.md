@@ -3,8 +3,9 @@ This bot at its current speed is not actually able to make real money from execu
 
 This project was created when i was very unexperienced, so expect the code of this project to be unoptimized, and overall just pretty badly written. Function documentation is written with the help of AI.
 
+DEX "Apeswap" is already implemented on src as an example.
 ### Description:
-Arbplus is a tool designed to completely automate the process
+triangular_arbitrage_fetcher is a tool designed to completely automate the process
 of triangular arbitrage:
 1. fetch pair data
 2. create triangles
@@ -13,7 +14,7 @@ of triangular arbitrage:
 
 The key feature of this tool is that this automation is possible
 with every DEX that is a Uniswap fork, such as Quickswap
-and Sushiswap. The only user input needed is the name of the
+and Sushiswap (Important: even tho adding a network can be done easly, right now this tool supports only Polyogn and Ethereum). The only user input needed is the name of the
 dex, its router smart contract address and the network name. Everything is then
 set to fetch data and start scanning for triangular arbitrage
 opportunities.
@@ -23,6 +24,7 @@ every DEX, but rather gathering data on chain, making this method universally ap
 ### Installation:
 
 1. clone the repo
+2. install requirements.txt with python 3.9.10
 2. get a free alchemy api key (for polygon network)
 3. get a free infura api key (for ethereum network)
 4. get a free etherscan api key (for ethereum network)
@@ -31,11 +33,12 @@ every DEX, but rather gathering data on chain, making this method universally ap
 
 ### Usage:
 **Add a new Uniswap fork:**
-1. click on "Add Swap" and input the name, network and router
+1. navigate on src/main and execute __main__.py with python
+2. click on "Add Swap" and input the name, network and router
 smart contract address of the wanted Uniswap fork, "factory" field is
 optional as it will be obtained automatically.
-2. click on "Save Swaps" once every needed information is added to save the newly added fork on file.
-3. select the wanted fork and click on "Fetch Info" to fetch all required pair data. This
+3. click on "Save Swaps" once every needed information is added to save the newly added fork on file.
+4. select the wanted fork and click on "Fetch Info" to fetch all required pair data. This
 process might require some time based on how big the dex is.
 
 **Fetch triangular arbitrage opportunities:**
@@ -52,3 +55,10 @@ Otherwise, every triangle fetched will be used.
 ### Documentation:
 
 [Function Documentation](docs/docs.md)
+
+### TODO list:
+
+- Optimize FetchTrianglesNew function
+- Make GUI options for filtering instead of having to manually write to file
+- Implement fully Ethereum network (p.e. FetchTokenPriceInWmatic is only for Polygon)
+- Display logs and useful info on GUI instead of terminal

@@ -3,3 +3,6 @@
 **/.vs/
 **/.vscode/
 **/creds.py
+/src/files/
+/src/temp/
+
