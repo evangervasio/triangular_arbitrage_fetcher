@@ -35,27 +35,7 @@ rate_limiter = RateLimiter(max_calls=2, period=1)
 global w3
 
 
-"""
-Returns essential data about a token pair, including the tokens involved, their symbols, and decimal places.
 
-This function retrieves information about a token pair contract on the blockchain. It uses the pair contract's ABI to 
-fetch addresses of the two tokens involved and then queries each token's contract for additional details such as their 
-decimals and symbols. The function includes retry logic to handle temporary errors and ensure successful data retrieval.
-
-### Parameters:
-- `pair`: The address of the pair contract for which data needs to be fetched.
-
-### Returns:
-- `tuple`: A tuple containing:
-  - The pair address.
-  - The address of the first token (`token0`).
-  - The address of the second token (`token1`).
-  - The decimal places for the first token (`token0_decimals`).
-  - The decimal places for the second token (`token1_decimals`).
-  - The symbol of the first token (`symbol0`).
-  - The symbol of the second token (`symbol1`).
-
-  If any of the values could not be retrieved, they are returned as `None`."""
 @rate_limiter
 def fetch_pair_data(pair):
     global w3
@@ -106,24 +86,7 @@ def get_pair(i):
             time.sleep((2 ** x) + np.random.random())
     return p
 
-"""
-Automatically fetches all pairs of a given Uniswap fork router contract without an API, with the possibility of excluding pools with 
-a total liquidity under or over a certain threshold, then calculates all the possible triangles for triangular arbitrage.
-### Key Features:
-- **No API Dependency:** The function directly interacts with the blockchain via Web3 to retrieve pair information, 
-  avoiding reliance on external APIs.
-- **Liquidity Filtering:** It has the capability to exclude pairs based on liquidity thresholds, though this feature is 
-  not explicitly implemented in the provided code snippet.
-- **Concurrency:** Utilizes concurrent processing to efficiently handle large numbers of pairs, improving performance.
-- **Automated Triangle Calculation:** After fetching pair data, it automatically calculates all possible triangular 
-  arbitrage opportunities, streamlining the arbitrage discovery process.
-  
-### Parameters:
-- `selectedSwap`: An object containing relevant swap details, such as the router contract address.
 
-### Returns:
-- The function does not return any value.
-"""
 def FetchExchangeInfo(selectedSwap):
 
     global w3
@@ -150,9 +113,18 @@ def FetchExchangeInfo(selectedSwap):
     liquidity_threshold = 100
     print("FetchInfo: fetching pairs")
     all_pairs=[]
+    all_pairs = [factory_contract.functions.allPairs(i).call() for i in tqdm(range(pair_count))]
 
     cur_path = os.path.dirname(__file__)
     new_path = os.path.relpath(f"../temp/temp{selectedSwap.Name}/pairs1.csv", cur_path)
+    directory, filename = os.path.split(new_path)
+
+    if not os.path.exists(new_path):
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+
+        with open(new_path, 'w') as file:
+            pass
     with open(new_path, "r", encoding="utf-8") as csv_file:
         csv_reader = csv.reader(csv_file)
         for row in csv_reader:
