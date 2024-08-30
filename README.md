@@ -2,8 +2,6 @@
 This bot at its current speed is not actually able to make real money from executing triangular arbitrage. If you choose to use this bot for economic purposes, you’re doing so at your own risks.
 
 This project was created when i was very unexperienced, so expect the code of this project to be unoptimized, and overall just pretty badly written. Function documentation is written with the help of AI.
-
-DEX "Apeswap" is already implemented on src as an example.
 ### Description:
 triangular_arbitrage_fetcher is a tool designed to completely automate the process
 of triangular arbitrage:
