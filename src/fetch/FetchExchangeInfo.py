@@ -83,7 +83,7 @@ def get_pair(i):
             if isinstance(e, requests.exceptions.HTTPError):
                 if e.response.status_code != 429:
                     raise
-            time.sleep((2 ** x) + np.random.random())
+          #  time.sleep((2 ** x) + np.random.random())
     return p
 
 
@@ -110,10 +110,9 @@ def FetchExchangeInfo(selectedSwap):
 
     pair_count = factory_contract.functions.allPairsLength().call()
 
-    liquidity_threshold = 100
     print("FetchInfo: fetching pairs")
-    all_pairs=[]
     all_pairs = [factory_contract.functions.allPairs(i).call() for i in tqdm(range(pair_count))]
+
 
     cur_path = os.path.dirname(__file__)
     new_path = os.path.relpath(f"../temp/temp{selectedSwap.Name}/pairs1.csv", cur_path)
@@ -138,7 +137,6 @@ def FetchExchangeInfo(selectedSwap):
     print("FetchInfo: finished fetching pairs data")
 
 
-    print("FetchInfo: saving pair data to csv")
     cur_path = os.path.dirname(__file__)
     new_path = os.path.relpath(f"../temp/temp{selectedSwap.Name}/pairs.csv", cur_path)
 
@@ -154,6 +152,19 @@ def FetchExchangeInfo(selectedSwap):
     print("FetchInfo: fetching triangles")
     FetchTrianglesNew.FetchTrianglesNew(selectedSwap.Name)
     print("FetchInfo: triangles fetched and saved in csv")
+
+
+    new_path = os.path.relpath(f"../files/files{selectedSwap.Name}/tokensLimits.csv", cur_path)
+    with open(new_path, 'w') as file:
+        pass
+    new_path = os.path.relpath(f"../files/files{selectedSwap.Name}/tokensToInclude.csv", cur_path)
+    with open(new_path, 'w') as file:
+        pass
+    new_path = os.path.relpath(f"../files/files{selectedSwap.Name}/tokensToExclude.csv", cur_path)
+    with open(new_path, 'w') as file:
+        pass
+
+
     print("FetchInfo: data fetch complete")
 
 def is_fetching_info():
