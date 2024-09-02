@@ -1,6 +1,6 @@
 ### Introduction:
 triangular_arbitrage_fetcher fetches pair data of any Uniswap forks without
-third party APIs, calculates combinations of three liquidity pools, and scans
+third party APIs, calculates combinations of liquidity pools triangles, and scans
 for profitable arbitrage on those combinations in real time.
 
 ![Alt text](showcase_video.mp4)
@@ -58,7 +58,7 @@ every DEX, but rather gathering data on chain, making this method universally ap
 
 ### Usage:
 **Add a new Uniswap fork:**
-1. navigate on src/main and execute __main__.py with python
+1. navigate on src/main and execute `__main__`.py with python
 2. click on "Add Swap" and input the name, network and router
 smart contract address of the wanted Uniswap fork, "factory" field is
 optional as it will be obtained automatically.
