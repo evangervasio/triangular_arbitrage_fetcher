@@ -3,7 +3,7 @@ triangular_arbitrage_fetcher fetches pair data of any Uniswap forks without
 third party APIs, calculates combinations of liquidity pools triangles, and scans
 for profitable arbitrage on those combinations in real time.
 
-![Alt text](showcase_video.mp4)
+https://github.com/user-attachments/assets/fd1e57fd-fe13-4774-a61f-6e7060011f27
 
 ### Key features:
 - Fetches pair data universally from any Uniswap fork DEX
