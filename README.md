@@ -50,10 +50,9 @@ every DEX, but rather gathering data on chain, making this method universally ap
 
 1. clone the repo
 2. install requirements.txt with python 3.9.10
-2. get a free alchemy api key (for polygon network)
-3. get a free infura api key (for ethereum network)
-4. get a free etherscan api key (for ethereum network)
-5. create a "creds.py" file and write on it these keys with the variables names "alchemy_key, infura_key, etherscan"
+2. get a free alchemy rpc key (for polygon network)
+3. get a free infura rpc key (for ethereum network)
+5. create a "creds.py" file and write on it these keys with the variables names "alchemy_key, infura_key"
 6. copy and paste "creds.py" in the calculator, fetch and executer folder
 
 ### Usage:
@@ -85,6 +84,7 @@ Otherwise, every triangle fetched will be used.
 - Optimize FetchArbitrage cycle (too slow to be competitive)
 - Optimize FetchExchangeInfo pair data fetch speed (too long for big swaps)
 - Make GUI options for filtering instead of having to manually write to file
-- Implement every network in a dynamic way, not just Polygon (alchemy now works on every network)
+- Implement every network in a dynamic way, not just Polygon (alchemy now works on every network, no need for other rpcs)
 - Display logs and useful info on GUI instead of terminal
 - Divide FetchArbitrage into small functions
+- Make rpc keys importable by GUI
